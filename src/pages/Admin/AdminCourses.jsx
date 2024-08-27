@@ -25,7 +25,7 @@ function AdminCourses() {
 
       if (selectedItemForEdit) {
         response = await axios.post(
-          "https://portfolio-mern-1-78st.onrender.com/api/portfolio/update-course",
+          "http://localhost:5000/api/portfolio/update-course",
           {
             ...values,
             _id: selectedItemForEdit._id,
@@ -33,7 +33,7 @@ function AdminCourses() {
         );
       } else {
         response = await axios.post(
-          "https://portfolio-mern-1-78st.onrender.com/api/portfolio/add-course",
+          "http://localhost:5000/api/portfolio/add-course",
           values
         );
       }
@@ -58,7 +58,7 @@ function AdminCourses() {
     try {
       dispatch(ShowLoading());
       const response = await axios.post(
-        "https://portfolio-mern-1-78st.onrender.com/api/portfolio/delete-course",
+        "http://localhost:5000/api/portfolio/delete-course",
         {
           _id: item._id,
         }

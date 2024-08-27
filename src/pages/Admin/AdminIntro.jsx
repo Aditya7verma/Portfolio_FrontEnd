@@ -13,7 +13,7 @@ function AdminIntro() {
     try {
       dispatch(ShowLoading());
       const response = await axios.post(
-        "https://portfolio-mern-1-78st.onrender.com/api/portfolio/update-intro",
+        "http://localhost:5000/api/portfolio/update-intro",
         {
           ...values,
           _id: portfolioData.intro._id,

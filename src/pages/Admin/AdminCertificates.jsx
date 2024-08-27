@@ -28,7 +28,7 @@ function Admincertificates() {
 
       if (selectedItemForEdit) {
         response = await axios.post(
-          "https://portfolio-mern-1-78st.onrender.com/api/portfolio/update-certificate",
+          "http://localhost:5000/api/portfolio/update-certificate",
           {
             ...values,
             _id: selectedItemForEdit._id,
@@ -36,7 +36,7 @@ function Admincertificates() {
         );
       } else {
         response = await axios.post(
-          "https://portfolio-mern-1-78st.onrender.com/api/portfolio/add-certificate",
+          "http://localhost:5000/api/portfolio/add-certificate",
           values
         );
       }
@@ -63,7 +63,7 @@ function Admincertificates() {
     try {
       dispatch(ShowLoading());
       const response = await axios.post(
-        "https://portfolio-mern-1-78st.onrender.com/api/portfolio/delete-certificate",
+        "http://localhost:5000/api/portfolio/delete-certificate",
         {
           _id: item._id,
         }

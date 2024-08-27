@@ -18,7 +18,7 @@ function AdminAbout() {
 
       dispatch(ShowLoading());
       const response = await axios.post(
-        "https://portfolio-mern-1-78st.onrender.com/api/portfolio/update-about",
+        "http://localhost:5000/api/portfolio/update-about",
         {
           ...values,
           _id: portfolioData.about._id,

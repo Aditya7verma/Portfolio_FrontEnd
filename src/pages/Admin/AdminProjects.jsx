@@ -28,7 +28,7 @@ function AdminProjects() {
 
       if (selectedItemForEdit) {
         response = await axios.post(
-          "https://portfolio-mern-1-78st.onrender.com/api/portfolio/update-project",
+          "http://localhost:5000/api/portfolio/update-project",
           {
             ...values,
             _id: selectedItemForEdit._id,
@@ -36,7 +36,7 @@ function AdminProjects() {
         );
       } else {
         response = await axios.post(
-          "https://portfolio-mern-1-78st.onrender.com/api/portfolio/add-project",
+          "http://localhost:5000/api/portfolio/add-project",
           values
         );
       }
@@ -61,7 +61,7 @@ function AdminProjects() {
     try {
       dispatch(ShowLoading());
       const response = await axios.post(
-        "https://portfolio-mern-1-78st.onrender.com/api/portfolio/delete-project",
+        "http://localhost:5000/api/portfolio/delete-project",
         {
           _id: item._id,
         }

@@ -32,5 +32,5 @@
     "tailwindcss": "^3.4.6",
     "vite": "^5.3.4"
   },
-  "proxy": "https://portfolio-mern-1-78st.onrender.com/"
+  "proxy": "http://localhost:5000/"
 }
