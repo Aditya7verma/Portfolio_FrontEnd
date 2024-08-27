@@ -81,6 +81,7 @@ function Admincertificates() {
       message.error(error.message);
     }
   };
+
   return (
     <div>
       <div className="flex justify-end">
@@ -89,7 +90,8 @@ function Admincertificates() {
           onClick={() => {
             setSelectedItemForEdit(null);
             setShowAddEditModal(true);
-            setType("add");
+            form.resetFields();
+            // setType("add");
           }}
         >
           Add certificate
@@ -135,8 +137,9 @@ function Admincertificates() {
                 className="bg-primary text-white px-5 py-2 "
                 onClick={() => {
                   setSelectedItemForEdit(certificate);
+                  form.setFieldsValue(certificate);
                   setShowAddEditModal(true);
-                  setType("edit");
+                  // setType("edit");
                 }}
               >
                 Edit
@@ -146,47 +149,42 @@ function Admincertificates() {
         ))}
       </div>
 
-      {(type === "add" || selectedItemForEdit) && (
-        <Modal
-          visible={showAddEditModal}
-          title={selectedItemForEdit ? "Edit Certificate" : "Add Certificate"}
-          footer={null}
-          onCancel={() => {
-            setShowAddEditModal(false);
-            setSelectedItemForEdit(null);
-          }}
+      {/* {(type === "add" || selectedItemForEdit) && ( */}
+      <Modal
+        open={showAddEditModal}
+        title={selectedItemForEdit ? "Edit Certificate" : "Add Certificate"}
+        footer={null}
+        onCancel={() => {
+          setShowAddEditModal(false);
+          form.resetFields();
+          setSelectedItemForEdit(null);
+        }}
+      >
+        <Form
+          //   To Reset the Form
+          form={form}
+          layout="vertical"
+          onFinish={onFinish}
+          // initialValues={selectedItemForEdit}
         >
-          <Form
-            //   To Reset the Form
-            // form={form}
-            layout="vertical"
-            onFinish={onFinish}
-            initialValues={
-              {
-                // Here due to in  technologies i didnot applied ? so Edit btn is not working
-                ...selectedItemForEdit,
-                technologies: selectedItemForEdit?.technologies?.join(", "),
-              } || {}
-            }
-          >
-            <Form.Item name="title" label="Title">
-              <Input placeholder="Title" />
-            </Form.Item>
+          <Form.Item name="title" label="Title">
+            <Input placeholder="Title" />
+          </Form.Item>
 
-            <Form.Item name="image" label="Image URL">
-              <Input placeholder="Image" />
-            </Form.Item>
+          <Form.Item name="image" label="Image URL">
+            <Input placeholder="Image" />
+          </Form.Item>
 
-            <Form.Item name="duration" label="Duration">
-              <textarea placeholder="Duration" />
-            </Form.Item>
+          <Form.Item name="duration" label="Duration">
+            <textarea placeholder="Duration" />
+          </Form.Item>
 
-            <Form.Item name="description" label="Description">
-              <textarea placeholder="Description" />
-            </Form.Item>
+          <Form.Item name="description" label="Description">
+            <textarea placeholder="Description" />
+          </Form.Item>
 
-            <div className="flex justify-end">
-              <button
+          <div className="flex justify-end">
+            {/* <button
                 className="border-primary text-primary px-5 py-2"
                 onClick={() => {
                   setShowAddEditModal(false);
@@ -194,14 +192,14 @@ function Admincertificates() {
                 }}
               >
                 Cancel
-              </button>
-              <button className="bg-primary text-white px-5 py-2" type="submit">
-                {selectedItemForEdit ? "Update" : "Add"}
-              </button>
-            </div>
-          </Form>
-        </Modal>
-      )}
+              </button> */}
+            <button className="bg-primary text-white px-5 py-2" type="submit">
+              {selectedItemForEdit ? "Update" : "Add"}
+            </button>
+          </div>
+        </Form>
+      </Modal>
+      {/* )} */}
     </div>
   );
 }

@@ -22,6 +22,9 @@ function Experiences() {
   // For the we created a fleg of usState add
   const [type, setType] = React.useState("add");
 
+  //   To Reset the Entity Form When click on diff certificate or add Certificate
+  const [form] = Form.useForm();
+
   const onFinish = async (values) => {
     try {
       dispatch(ShowLoading());
@@ -88,7 +91,8 @@ function Experiences() {
           onClick={() => {
             setSelectedItemForEdit(null);
             setShowAddEditModal(true);
-            setType("add");
+            form.resetFields();
+            // setType("add");
           }}
         >
           Add Experience
@@ -126,8 +130,9 @@ function Experiences() {
                 className="bg-primary text-white px-5 py-2 "
                 onClick={() => {
                   setSelectedItemForEdit(experience);
+                  form.setFieldsValue(experience);
                   setShowAddEditModal(true);
-                  setType("edit");
+                  // setType("edit");
                 }}
               >
                 Edit
@@ -138,36 +143,38 @@ function Experiences() {
       </div>
 
       {/* Here we added the condition to show the modal */}
-      {(type === "add" || selectedItemForEdit) && (
-        <Modal
-          visible={showAddEditModal}
-          title={selectedItemForEdit ? "Edit Experience" : "Add Experience"}
-          footer={null}
-          onCancel={() => {
-            setShowAddEditModal(false);
-            setSelectedItemForEdit(null);
-          }}
+      {/* {(type === "add" || selectedItemForEdit) && ( */}
+      <Modal
+        open={showAddEditModal}
+        title={selectedItemForEdit ? "Edit Experience" : "Add Experience"}
+        footer={null}
+        onCancel={() => {
+          setShowAddEditModal(false);
+          form.resetFields();
+          setSelectedItemForEdit(null);
+        }}
+      >
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={onFinish}
+          // initialValues={selectedItemForEdit || {}}
         >
-          <Form
-            layout="vertical"
-            onFinish={onFinish}
-            initialValues={selectedItemForEdit || {}}
-          >
-            <Form.Item name="period" label="Period">
-              <Input placeholder="Period" />
-            </Form.Item>
-            <Form.Item name="company" label="Company">
-              <Input placeholder="Company" />
-            </Form.Item>
-            <Form.Item name="title" label="Title">
-              <Input placeholder="Title" />
-            </Form.Item>
-            <Form.Item name="description" label="Description">
-              <Input placeholder="Description" />
-            </Form.Item>
+          <Form.Item name="period" label="Period">
+            <Input placeholder="Period" />
+          </Form.Item>
+          <Form.Item name="company" label="Company">
+            <Input placeholder="Company" />
+          </Form.Item>
+          <Form.Item name="title" label="Title">
+            <Input placeholder="Title" />
+          </Form.Item>
+          <Form.Item name="description" label="Description">
+            <Input placeholder="Description" />
+          </Form.Item>
 
-            <div className="flex justify-end">
-              <button
+          <div className="flex justify-end">
+            {/* <button
                 className="border-primary text-primary px-5 py-2"
                 onClick={() => {
                   setShowAddEditModal(false);
@@ -175,14 +182,14 @@ function Experiences() {
                 }}
               >
                 Cancel
-              </button>
-              <button className="bg-primary text-white px-5 py-2" type="submit">
-                {selectedItemForEdit ? "Update" : "Add"}
-              </button>
-            </div>
-          </Form>
-        </Modal>
-      )}
+              </button> */}
+            <button className="bg-primary text-white px-5 py-2" type="submit">
+              {selectedItemForEdit ? "Update" : "Add"}
+            </button>
+          </div>
+        </Form>
+      </Modal>
+      {/* )} */}
     </div>
   );
 }

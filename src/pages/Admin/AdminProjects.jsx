@@ -15,6 +15,9 @@ function AdminProjects() {
   const [selectedItemForEdit, setSelectedItemForEdit] = React.useState(null);
   const [type, setType] = React.useState("add");
 
+  //   To Reset the Entity Form When click on diff certificate or add Certificate
+  const [form] = Form.useForm();
+
   const onFinish = async (values) => {
     // This is for as Technologies is in string to convert it in Array
     const tempTechnologies = values.technologies.split(",");
@@ -84,7 +87,8 @@ function AdminProjects() {
           onClick={() => {
             setSelectedItemForEdit(null);
             setShowAddEditModal(true);
-            setType("add");
+            form.resetFields();
+            // setType("add");
           }}
         >
           Add Project
@@ -120,8 +124,9 @@ function AdminProjects() {
                 className="bg-primary text-white px-5 py-2 "
                 onClick={() => {
                   setSelectedItemForEdit(project);
+                  form.setFieldsValue(project);
                   setShowAddEditModal(true);
-                  setType("edit");
+                  // setType("edit");
                 }}
               >
                 Edit
@@ -131,47 +136,48 @@ function AdminProjects() {
         ))}
       </div>
 
-      {(type === "add" || selectedItemForEdit) && (
-        <Modal
-          visible={showAddEditModal}
-          title={selectedItemForEdit ? "Edit Project" : "Add Project"}
-          footer={null}
-          onCancel={() => {
-            setShowAddEditModal(false);
-            setSelectedItemForEdit(null);
-          }}
+      {/* {(type === "add" || selectedItemForEdit) && ( */}
+      <Modal
+        open={showAddEditModal}
+        title={selectedItemForEdit ? "Edit Project" : "Add Project"}
+        footer={null}
+        onCancel={() => {
+          setShowAddEditModal(false);
+          setSelectedItemForEdit(null);
+        }}
+      >
+        <Form
+          form={form}
+          layout="vertical"
+          onFinish={onFinish}
+          // initialValues={
+          //   {
+          //     ...selectedItemForEdit,
+          //     technologies: selectedItemForEdit?.technologies.join(", "),
+          //   } || {}
+          // }
         >
-          <Form
-            layout="vertical"
-            onFinish={onFinish}
-            initialValues={
-              {
-                ...selectedItemForEdit,
-                technologies: selectedItemForEdit?.technologies.join(", "),
-              } || {}
-            }
-          >
-            <Form.Item name="title" label="Title">
-              <Input placeholder="Title" />
-            </Form.Item>
-            <Form.Item name="image" label="Image URL">
-              <Input placeholder="Image" />
-            </Form.Item>
+          <Form.Item name="title" label="Title">
+            <Input placeholder="Title" />
+          </Form.Item>
+          <Form.Item name="image" label="Image URL">
+            <Input placeholder="Image" />
+          </Form.Item>
 
-            <Form.Item name="description" label="Description">
-              <textarea placeholder="Description" />
-            </Form.Item>
+          <Form.Item name="description" label="Description">
+            <textarea placeholder="Description" />
+          </Form.Item>
 
-            <Form.Item name="link" label="Link">
-              <Input placeholder="Link" />
-            </Form.Item>
+          <Form.Item name="link" label="Link">
+            <Input placeholder="Link" />
+          </Form.Item>
 
-            <Form.Item name="technologies" label="Technologies">
-              <Input placeholder="Technologies" />
-            </Form.Item>
+          <Form.Item name="technologies" label="Technologies">
+            <Input placeholder="Technologies" />
+          </Form.Item>
 
-            <div className="flex justify-end">
-              <button
+          <div className="flex justify-end">
+            {/* <button
                 className="border-primary text-primary px-5 py-2"
                 onClick={() => {
                   setShowAddEditModal(false);
@@ -179,14 +185,14 @@ function AdminProjects() {
                 }}
               >
                 Cancel
-              </button>
-              <button className="bg-primary text-white px-5 py-2" type="submit">
-                {selectedItemForEdit ? "Update" : "Add"}
-              </button>
-            </div>
-          </Form>
-        </Modal>
-      )}
+              </button> */}
+            <button className="bg-primary text-white px-5 py-2" type="submit">
+              {selectedItemForEdit ? "Update" : "Add"}
+            </button>
+          </div>
+        </Form>
+      </Modal>
+      {/* )} */}
     </div>
   );
 }
