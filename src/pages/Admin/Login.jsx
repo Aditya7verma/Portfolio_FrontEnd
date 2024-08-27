@@ -15,7 +15,7 @@ function Login() {
     try {
       dispatch(ShowLoading());
       const response = await axios.post(
-        "https://portfolio-mern-backend-zn4j.onrender.com//api/portfolio/admin-login",
+        "https://portfolio-mern-backend-zn4j.onrender.com/api/portfolio/admin-login",
         user
       );
       console.log("first");

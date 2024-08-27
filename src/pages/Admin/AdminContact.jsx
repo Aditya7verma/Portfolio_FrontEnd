@@ -13,7 +13,7 @@ function AdminContact() {
     try {
       dispatch(ShowLoading());
       const response = await axios.post(
-        "https://portfolio-mern-backend-zn4j.onrender.com//api/portfolio/update-contact",
+        "https://portfolio-mern-backend-zn4j.onrender.com/api/portfolio/update-contact",
         {
           ...values,
           _id: portfolioData.contact._id,

@@ -24,7 +24,7 @@ function App() {
     try {
       dispatch(ShowLoading());
       const response = await axios.get(
-        "https://portfolio-mern-backend-zn4j.onrender.com//api/portfolio/get-portfolio-data"
+        "https://portfolio-mern-backend-zn4j.onrender.com/api/portfolio/get-portfolio-data"
       );
       // console.log(response.data);
       dispatch(SetPortfolioData(response.data));
