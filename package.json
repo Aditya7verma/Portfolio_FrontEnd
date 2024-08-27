@@ -32,5 +32,5 @@
     "tailwindcss": "^3.4.6",
     "vite": "^5.3.4"
   },
-  "proxy": "http://localhost:5000/"
+  "proxy": "https://portfolio-mern-backend-zn4j.onrender.com//"
 }

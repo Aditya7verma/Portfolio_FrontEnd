@@ -32,7 +32,7 @@ function Experiences() {
       // Here we are checking if the opration we are doing is Adding Exp or Updating it
       if (selectedItemForEdit) {
         response = await axios.post(
-          "http://localhost:5000/api/portfolio/update-experience",
+          "https://portfolio-mern-backend-zn4j.onrender.com//api/portfolio/update-experience",
           {
             ...values,
             _id: selectedItemForEdit._id,
@@ -40,7 +40,7 @@ function Experiences() {
         );
       } else {
         response = await axios.post(
-          "http://localhost:5000/api/portfolio/add-experience",
+          "https://portfolio-mern-backend-zn4j.onrender.com//api/portfolio/add-experience",
           values
         );
       }
@@ -65,7 +65,7 @@ function Experiences() {
     try {
       dispatch(ShowLoading());
       const response = await axios.post(
-        "http://localhost:5000/api/portfolio/delete-experience",
+        "https://portfolio-mern-backend-zn4j.onrender.com//api/portfolio/delete-experience",
         {
           _id: item._id,
         }
